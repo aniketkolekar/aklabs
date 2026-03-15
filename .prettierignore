@@ -1,5 +1,23 @@
-# Add files here to ignore them from prettier formatting
-/dist
-/coverage
-/.nx/cache
-/.nx/workspace-data
+# Build outputs
+dist
+build
+coverage
+tmp
+out-tsc
+
+# NX
+.nx
+.cache
+
+# Dependencies
+node_modules
+
+# Lock files
+pnpm-lock.yaml
+
+# Auto-generated files
+*.min.js
+*.min.css
+
+# NX generated migration files
+migrations.json

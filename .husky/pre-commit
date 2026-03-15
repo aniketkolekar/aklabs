@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Format and lint staged files
+npx lint-staged
+
+# Secret detection on staged files
+npx secretlint --secretlintignore .secretlintignore "**/*"
+
+# Typecheck affected projects
+npx nx affected --target=typecheck --base=main --parallel=3

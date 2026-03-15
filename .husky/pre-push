@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Secret detection via gitleaks (optional, install via: brew install gitleaks)
+if command -v gitleaks &> /dev/null; then
+  gitleaks protect --staged -v
+else
+  echo "ℹ️  gitleaks not installed — secretlint covers baseline secret detection."
+  echo "   For deeper scanning install: brew install gitleaks"
+fi

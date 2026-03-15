@@ -2,6 +2,7 @@
 
 # compiled output
 dist
+build
 tmp
 out-tsc
 
@@ -40,3 +41,25 @@ Thumbs.db
 
 .nx/cache
 .nx/workspace-data
+
+vite.config.*.timestamp*
+vitest.config.*.timestamp*
+
+# NX generated files
+dependency-graph.json
+
+# Local env
+.env
+*.env.*
+*.local
+
+# Security - certificates and keys
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Logs
+*.log
+
+*storybook.log
