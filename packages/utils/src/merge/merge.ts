@@ -66,8 +66,16 @@ export function merge<T extends object, S extends object[]>(
     return proto === null || proto === Object.prototype;
   }
 
+  function isSafeKey(key: string): boolean {
+    return key !== '__proto__' && key !== 'constructor' && key !== 'prototype';
+  }
+
   function mergeObjects(dest: Record<string, unknown>, src: Record<string, unknown>): void {
     Object.keys(src).forEach((key) => {
+      if (!isSafeKey(key)) {
+        return;
+      }
+
       const srcValue = src[key];
 
       // undefined in source does not overwrite target
