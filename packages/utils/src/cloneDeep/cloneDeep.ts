@@ -112,11 +112,6 @@ export function cloneDeep<T>(value: T): T {
       return cloned as V;
     }
 
-    // Handle functions - return as-is (cannot be meaningfully cloned)
-    if (typeof val === 'function') {
-      return val;
-    }
-
     // Handle plain objects and class instances
     // For class instances, we clone the properties but preserve the prototype
     const cloned = Object.create(Object.getPrototypeOf(val)) as V;
@@ -126,7 +121,7 @@ export function cloneDeep<T>(value: T): T {
     Object.getOwnPropertyNames(val).forEach((key) => {
       const descriptor = Object.getOwnPropertyDescriptor(val, key);
       if (descriptor) {
-        if (descriptor.value !== undefined) {
+        if ('value' in descriptor) {
           Object.defineProperty(cloned, key, {
             ...descriptor,
             value: clone(descriptor.value),
@@ -142,7 +137,7 @@ export function cloneDeep<T>(value: T): T {
     Object.getOwnPropertySymbols(val).forEach((sym) => {
       const descriptor = Object.getOwnPropertyDescriptor(val, sym);
       if (descriptor) {
-        if (descriptor.value !== undefined) {
+        if ('value' in descriptor) {
           Object.defineProperty(cloned, sym, {
             ...descriptor,
             value: clone(descriptor.value),

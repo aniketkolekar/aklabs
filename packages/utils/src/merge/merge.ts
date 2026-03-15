@@ -13,6 +13,12 @@
  * - Arrays are replaced, not merged: `merge({a:[1]}, {a:[2,3]})` → `{a:[2,3]}`
  * - Only plain objects are merged recursively; other object types are replaced
  *
+ * **TypeScript note:** When merging 2+ sources, the return type is `T & S[number]`
+ * which represents a union of source types, not their intersection. TypeScript
+ * cannot precisely type variadic merges. The runtime behavior is correct - all
+ * properties from all sources are merged - but type inference may require assertion
+ * for 2+ sources.
+ *
  * @param target - The target object to merge into (will be mutated)
  * @param sources - One or more source objects to merge from
  * @returns The mutated target object with all sources merged

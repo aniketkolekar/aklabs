@@ -24,7 +24,9 @@ export interface ThrottledFunction<T extends (...args: never[]) => unknown> {
    */
   (...args: Parameters<T>): ReturnType<T> | undefined;
   /**
-   * Cancels any pending invocation
+   * Cancels any pending trailing invocation and resets the throttle window.
+   * The next call after cancel() will invoke immediately as if the throttled
+   * function was just created.
    */
   cancel(): void;
   /**

@@ -45,31 +45,6 @@
  * ```
  */
 export function isEqual(a: unknown, b: unknown): boolean {
-  // Handle same reference
-  if (a === b) {
-    return true;
-  }
-
-  // Handle NaN (NaN !== NaN, but we want to treat them as equal)
-  if (typeof a === 'number' && typeof b === 'number' && Number.isNaN(a) && Number.isNaN(b)) {
-    return true;
-  }
-
-  // Handle null and undefined
-  if (a === null || b === null || a === undefined || b === undefined) {
-    return a === b;
-  }
-
-  // Handle different types
-  if (typeof a !== typeof b) {
-    return false;
-  }
-
-  // Handle primitives (already checked === above, so if we're here they're different)
-  if (typeof a !== 'object' || typeof b !== 'object') {
-    return false;
-  }
-
   // Use WeakMap to track circular references
   const cache = new WeakMap<object, object>();
 
@@ -143,15 +118,23 @@ export function isEqual(a: unknown, b: unknown): boolean {
       }
 
       for (const value of val1) {
-        let found = false;
-        for (const value2 of val2) {
-          if (deepEqual(value, value2)) {
-            found = true;
-            break;
+        if (typeof value !== 'object' || value === null) {
+          // Primitives: O(1) lookup
+          if (!val2.has(value)) {
+            return false;
           }
-        }
-        if (!found) {
-          return false;
+        } else {
+          // Objects: fall back to deep comparison O(n)
+          let found = false;
+          for (const value2 of val2) {
+            if (deepEqual(value, value2)) {
+              found = true;
+              break;
+            }
+          }
+          if (!found) {
+            return false;
+          }
         }
       }
 

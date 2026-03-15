@@ -66,6 +66,15 @@ describe('cloneDeep', () => {
       expect('b' in cloned).toBe(true);
       expect(cloned.b).toBeUndefined();
     });
+
+    it('clones object with only undefined property', () => {
+      const original = { a: undefined };
+      const cloned = cloneDeep(original);
+
+      expect(cloned).toEqual({ a: undefined });
+      expect('a' in cloned).toBe(true);
+      expect(cloned.a).toBeUndefined();
+    });
   });
 
   describe('arrays and nested arrays', () => {

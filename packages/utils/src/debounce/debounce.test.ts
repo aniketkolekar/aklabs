@@ -196,6 +196,16 @@ describe('debounce', () => {
   });
 
   describe('edge cases', () => {
+    it('never invokes when both leading and trailing are false', () => {
+      const fn = vi.fn();
+      const debounced = debounce(fn, 100, { leading: false, trailing: false });
+
+      debounced();
+      vi.advanceTimersByTime(100);
+
+      expect(fn).not.toHaveBeenCalled();
+    });
+
     it('works correctly when wait is 0', () => {
       const fn = vi.fn();
       const debounced = debounce(fn, 0);
