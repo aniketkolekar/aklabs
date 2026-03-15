@@ -9,8 +9,10 @@ const __dirname = dirname(__filename);
 export default defineConfig({
   plugins: [
     dts({
-      include: ['src/**/*.ts'],
-      outDir: join(__dirname, 'dist'),
+      include: ['src'],
+      exclude: ['src/**/*.test.ts', 'src/**/*.spec.ts'],
+      copyDtsFiles: true,
+      staticImport: true,
       insertTypesEntry: true,
     }),
   ],

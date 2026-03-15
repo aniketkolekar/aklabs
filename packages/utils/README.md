@@ -25,4 +25,3 @@ import { debounce } from '@aklabs/utils';
 | `isEqual`   | Deep equality check                          |
 | `pick`      | Pick keys from an object (type-safe)         |
 | `omit`      | Omit keys from an object (type-safe)         |
-| `storage`   | Type-safe localStorage wrapper               |
