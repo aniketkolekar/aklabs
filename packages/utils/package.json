@@ -27,7 +27,6 @@
     "merge",
     "isEqual",
     "pick",
-    "omit",
-    "localStorage"
+    "omit"
   ]
 }

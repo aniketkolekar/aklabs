@@ -1,0 +1,5 @@
+{
+  "permissions": {
+    "allow": ["Bash(pnpm format:check)", "Bash(git stash *)", "Bash(pnpm prettier *)"]
+  }
+}
